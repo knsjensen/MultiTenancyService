@@ -332,36 +332,3 @@ public enum NullTenantReferenceHandling
     //     can be useful for admin reporting across all tenants.
     NotNullGlobalAccess = 2
 }
-
-```
-
-## Interesting Logs
-
-### Microsoft.AspNetCore start of request
-
-> Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request starting HTTP/1.1 POST http://**localhost**:5020/account/login?returnUrl=%2Fgrants application/x-www-form-urlencoded 267
-
-### MultiTenancyServer.EntityFrameworkCore lookup tenant
-
-> Microsoft.EntityFrameworkCore.Database.Command:Information: Executed DbCommand (3ms) [Parameters=[@__normalizedCanonicalName_0='**LOCALHOST**' (Size = 256)], CommandType='Text', CommandTimeout='30']
-SELECT TOP(1) [u].[Id], [u].[CanonicalName], [u].[ConcurrencyStamp], [u].[Name], [u].[NormalizedCanonicalName]
-FROM [Tenants] AS [u]
-WHERE [u].[NormalizedCanonicalName] = @__normalizedCanonicalName_0
-
-### MultiTenancyServer.AspNetCore found tenant
-
->MultiTenancyServer.Http.HttpTenancyProvider:Debug: Tenant **TEST_TENANT_1** found by **DomainParser** for value **localhost** in request http://**localhost**:5020/account/login?returnUrl=%2Fgrants.
-
-### Microsoft.AspNetCore.Identity lookup user within tenant
-
-> Microsoft.EntityFrameworkCore.Database.Command:Information: Executed DbCommand (13ms) [Parameters=[@___tenantId_0='**TEST_TENANT_1**' (Size = 4000), @__normalizedUserName_0='ALICE' (Size = 256)], CommandType='Text', CommandTimeout='30']
-SELECT TOP(1) [u].[Id], ..., [u].[UserName]
-FROM [Users] AS [u]
-WHERE **(@___tenantId_0 IS NOT NULL AND ([u].[TenantId] = @___tenantId_0))** AND ([u].[NormalizedUserName] = @__normalizedUserName_0)
-
-### IdentityServer4 lookup persisted grant within tenant
-
-> Microsoft.EntityFrameworkCore.Database.Command:Information: Executed DbCommand (1ms) [Parameters=[@___tenantId_0='**TEST_TENANT_1**' (Size = 4000), @__subjectId_0='3ab99036-8ac1-4270-8a1e-390988966b9c' (Size = 200)], CommandType='Text', CommandTimeout='30']
-SELECT [p].[Key], [p].[ClientId], [p].[CreationTime], [p].[Data], [p].[Expiration], [p].[SubjectId], [p].[TenantId], [p].[Type]
-FROM [PersistedGrants] AS [p]
-WHERE **(@___tenantId_0 IS NOT NULL AND ([p].[TenantId] = @___tenantId_0))** AND ([p].[SubjectId] = @__subjectId_0)
