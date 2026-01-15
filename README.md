@@ -2,7 +2,15 @@
 
 # MultiTenancyServer
 
-MultiTenancyServer aims to be a lightweight package for adding multi-tenancy support to any codebase easily. Its design is heavily influenced from ASP.NET Core Identity. You can add multi-tenancy support to your model without adding any tenant key properties to any classes or entities. Using ASP.NET Core, the current tenant can be retrieved by a custom domain name, sub-domain, partial hostname, HTTP request header, child or partial URL path, query string parameter, authenticated user claim, or a custom request parser implementation. Using Entity Framework Core, tenant keys are added as shadow properties (or optionally concrete properties) and enforced through global query filters, all configurable options can be set from defaults or overidden per entity. The below example highlights how to use MultiTenancyServer with ASP.NET Core Identity and IdentityServer4 together. You can find many full working samples integrated with IdentityServer4, ASP.NET Core Identity (using different key types such as String and Int64), and  Entity Framework Core in the [samples repo](https://github.com/MultiTenancyServer/MultiTenancyServer.Samples).
+MultiTenancyServer aims to be a lightweight package for adding multi-tenancy support to any codebase easily. 
+Its design is heavily influenced from ASP.NET Core Identity. You can add multi-tenancy support to your model without adding any tenant key properties to any classes or entities. 
+Using ASP.NET Core, the current tenant can be retrieved by a custom domain name, sub-domain, partial hostname, HTTP request header, 
+child or partial URL path, query string parameter, authenticated user claim, or a custom request parser implementation. 
+Using Entity Framework Core, tenant keys are added as shadow properties (or optionally concrete properties) and enforced through global query filters, 
+all configurable options can be set from defaults or overidden per entity. 
+The below example highlights how to use MultiTenancyServer with ASP.NET Core Identity and IdentityServer4 together. 
+You can find many full working samples integrated with IdentityServer4, ASP.NET Core Identity (using different key types such as String and Int64), 
+and  Entity Framework Core in the [samples repo](https://github.com/MultiTenancyServer/MultiTenancyServer.Samples).
 
 ## Define Model
 Define your own tenant model, or inherit from TenancyTenant, or just use TenancyTenant as is. In this example we will inherit from TenancyTenant and add a display name.

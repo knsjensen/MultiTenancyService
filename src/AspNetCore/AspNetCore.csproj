@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0</TargetFrameworks>
+        <TargetFrameworks>net10.0</TargetFrameworks>
         <Description>MultiTenancyServer ASP.NET Core library.</Description>
         <AssemblyName>MultiTenancyServer.AspNetCore</AssemblyName>
         <RootNamespace>MultiTenancyServer</RootNamespace>
         <PackageTags>multitenancy multi-tenancy multitenant multi-tenant tenants tenant company client customer division partition aspnetcore aspnet core</PackageTags>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
@@ -17,15 +17,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+      <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.102" />
     </ItemGroup>
 
 </Project>
